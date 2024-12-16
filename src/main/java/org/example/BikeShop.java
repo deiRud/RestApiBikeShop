@@ -50,6 +50,7 @@ public class BikeShop {
         });
 
 
+
        // get("/hello", (req, res) -> "A placeholder for a product");
 
         //get("/products/:name", (req, res) -> "Placement for " + req.params(":name"));
