@@ -13,6 +13,7 @@ public class BikeShop {
             response.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
         });
 
+
         Product[] mountainbikes = {
                 new Product("BULLS", "Copperhead 2 27,5", "Kettenschaltung | 20 Gang", "999,95",
                         new Color[]{new Color("#FF6347", "Copperhead_2_27_5.png"), new Color("#000000", "Copperhead_2_27_5_black.png")}),
@@ -37,6 +38,7 @@ public class BikeShop {
                 new Product("AXA", "Flex Mount", "", "11,00", new Color[]{new Color("#000000", "flex_mount.png")})
         };
 
+
         get("products/:category", (req, res) -> {
             String category = req.params(":category");
             res.type("application/json");
@@ -48,12 +50,5 @@ public class BikeShop {
                 default -> gson.toJson(new Product[0]);
             };
         });
-
-
-
-       // get("/hello", (req, res) -> "A placeholder for a product");
-
-
-        //get("/products/:name", (req, res) -> "Placement for " + req.params(":name"));
     }
 }
