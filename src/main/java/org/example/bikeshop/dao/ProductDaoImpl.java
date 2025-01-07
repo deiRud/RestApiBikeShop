@@ -1,6 +1,7 @@
 package org.example.bikeshop.dao;
 
 import org.example.Bike;
+import org.example.Color;
 import org.example.Product;
 
 import java.sql.Connection;
@@ -51,30 +52,15 @@ public class ProductDaoImpl implements ProductDao{
     }
 
     private Product createProduct(ResultSet rs) throws SQLException {
-        String type = rs.getString("type");
-        return switch (type) {
-            case "Bike" -> new Bike(
-                    rs.getString("brand"),
-                    rs.getString("model"),
-                    rs.getString("specifications"),
-                    rs.getDouble("price"),
-                    List.of(new Color(rs.getString("color_code"), rs.getString("image_url")))
-            );
-            case "Accessories" -> new Accessories(
-                    rs.getString("brand"),
-                    rs.getString("model"),
-                    rs.getString("specifications"),
-                    rs.getDouble("price"),
-                    List.of(new Color(rs.getString("color_code"), rs.getString("image_url")))
-            );
-            case "emtb" -> new Emtb(
-                    rs.getString("brand"),
-                    rs.getString("model"),
-                    rs.getString("specifications"),
-                    rs.getDouble("price"),
-                    List.of(new Color(rs.getString("color_code"), rs.getString("image_url")))
-            );
-            default -> throw new IllegalArgumentException("Unknown product type: " + type);
-        };
+        return new Product(
+                rs.getInt("productId"),
+                rs.getString("brand"),
+                rs.getString("model"),
+                rs.getString("specifications"),
+                rs.getString("price"),
+                new Color[]{
+                        new Color(rs.getString("color_code"), rs.getString("image_url"))
+                }
+        );
     }
 }
