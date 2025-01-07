@@ -3,20 +3,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Product {
-
+    private int productId;
     private String brand;
     private String model;
     private String specifications;
     private String price;
     private List<Color> colors;  // List to hold color options, each with a color and image URL
 
-    // Constructor
-    public Product(String brand, String model, String specifications, String price, org.example.Color[] colors) {
+    public Product(int productId,String brand, String model, String specifications, String price, org.example.Color[] colors) {
+        this.productId = productId;
         this.brand = brand;
         this.model = model;
         this.specifications = specifications;
         this.price = price;
         this.colors = Arrays.asList(colors);
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getBrand() {
