@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.util.List;
 
 public interface ProductDao {
-    List<Product> getAll();
     List<Product> getByCategory(String category);
 
 }

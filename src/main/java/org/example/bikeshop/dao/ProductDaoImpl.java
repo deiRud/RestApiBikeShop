@@ -1,9 +1,8 @@
 package org.example.bikeshop.dao;
 
-import org.example.Bike;
 import org.example.Color;
 import org.example.Product;
-
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,38 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao{
-    private final Connection connection;
+    private final DataSource dataSource;
 
-    public ProductDaoImpl(Connection connection) {
-        this.connection = connection;
-    }
-
-    @Override
-    public List<Product> getAll() {
-        List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM product";
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                Product product = createProduct(rs);
-                products.add(product);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return products;
+    public ProductDaoImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override
     public List<Product> getByCategory(String category) {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM products WHERE category = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, category);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Product product = createProduct(rs);
-                products.add(product);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Product product = createProduct(rs);
+                    products.add(product);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,13 +38,13 @@ public class ProductDaoImpl implements ProductDao{
 
     private Product createProduct(ResultSet rs) throws SQLException {
         return new Product(
-                rs.getInt("productId"),
+                rs.getInt("product_id"),
                 rs.getString("brand"),
                 rs.getString("model"),
                 rs.getString("specifications"),
                 rs.getString("price"),
                 new Color[]{
-                        new Color(rs.getString("color_code"), rs.getString("image_url"))
+                        new Color(rs.getString("images"))
                 }
         );
     }

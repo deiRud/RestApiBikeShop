@@ -1,27 +1,22 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import javax.sql.DataSource;
 
 public class DatabaseConnection {
-    private static final String jdbcURL = "jdbc:postgresql://localhost:5432/online_bike_shop";
-    private static final String username = "postgres";
-    private static final String password = "tArakan123!";
+    private static HikariDataSource dataSource;
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(jdbcURL, username, password);
+    static {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:postgresql://localhost:5432/online_bike_shop");
+        config.setUsername("postgres");
+        config.setPassword("tArakan123!");
+        dataSource = new HikariDataSource(config);
     }
 
-    public static void main(String[] args) {
-        try (Connection connection = getConnection()) {
-            if (connection != null) {
-                System.out.println("Connected to the database!");
-            } else {
-                System.out.println("Failed to make connection!");
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.getMessage());
-        }
+    public static DataSource getDataSource() {
+        return dataSource;
     }
 }
