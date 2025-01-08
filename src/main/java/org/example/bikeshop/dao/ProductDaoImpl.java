@@ -44,7 +44,7 @@ public class ProductDaoImpl implements ProductDao{
                 rs.getString("specifications"),
                 rs.getString("price"),
                 new Color[]{
-                        new Color(rs.getString("images"))
+                        new Color(rs.getString("color"), rs.getString("imageurl"))
                 }
         );
     }

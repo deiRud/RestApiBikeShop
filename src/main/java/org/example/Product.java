@@ -8,7 +8,7 @@ public class Product {
     private String model;
     private String specifications;
     private String price;
-    private List<Color> colors;  // List to hold color options, each with a color and image URL
+    private Color[] colors;
 
     public Product(int productId,String brand, String model, String specifications, String price, org.example.Color[] colors) {
         this.productId = productId;
@@ -16,7 +16,7 @@ public class Product {
         this.model = model;
         this.specifications = specifications;
         this.price = price;
-        this.colors = Arrays.asList(colors);
+        this.colors = colors;
     }
 
     public int getProductId() {
@@ -59,11 +59,11 @@ public class Product {
         this.price = price;
     }
 
-    public List<Color> getColors() {
+    public Color[] getColors() {
         return colors;
     }
 
-    public void setColors(List<Color> colors) {
+    public void setColors(Color[] colors) {
         this.colors = colors;
     }
 

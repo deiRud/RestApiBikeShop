@@ -4,7 +4,7 @@ public class Color {
     private String hexCode;
     private String imageName;
 
-    public Color(String hexCode) {
+    public Color(String hexCode, String imageName) {
         this.hexCode = hexCode;
         this.imageName = imageName;
     }
