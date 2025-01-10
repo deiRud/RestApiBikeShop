@@ -8,11 +8,15 @@ import javax.sql.DataSource;
 public class DatabaseConnection {
     private static HikariDataSource dataSource;
 
+    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/online_bike_shop";
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "tArakan123!";
+
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/online_bike_shop");
-        config.setUsername("postgres");
-        config.setPassword("tArakan123!");
+        config.setJdbcUrl(JDBC_URL);
+        config.setUsername(USERNAME);
+        config.setPassword(PASSWORD);
         dataSource = new HikariDataSource(config);
     }
 

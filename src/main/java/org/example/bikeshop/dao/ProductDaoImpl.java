@@ -13,6 +13,14 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao{
     private final DataSource dataSource;
 
+    private static final String PRODUCT_ID = "product_id";
+    private static final String BRAND = "brand";
+    private static final String MODEL = "model";
+    private static final String SPECIFICATIONS = "specifications";
+    private static final String PRICE = "price";
+    private static final String COLOR = "color";
+    private static final String IMAGE_URL = "imageurl";
+
     public ProductDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -38,13 +46,13 @@ public class ProductDaoImpl implements ProductDao{
 
     private Product createProduct(ResultSet rs) throws SQLException {
         return new Product(
-                rs.getInt("product_id"),
-                rs.getString("brand"),
-                rs.getString("model"),
-                rs.getString("specifications"),
-                rs.getString("price"),
+                rs.getInt(PRODUCT_ID),
+                rs.getString(BRAND),
+                rs.getString(MODEL),
+                rs.getString(SPECIFICATIONS),
+                rs.getString(PRICE),
                 new Color[]{
-                        new Color(rs.getString("color"), rs.getString("imageurl"))
+                        new Color(rs.getString(COLOR), rs.getString(IMAGE_URL))
                 }
         );
     }

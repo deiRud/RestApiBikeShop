@@ -10,7 +10,13 @@ public class Product {
     private String price;
     private Color[] colors;
 
-    public Product(int productId,String brand, String model, String specifications, String price, org.example.Color[] colors) {
+    public Product(int productId,String brand, String model) {
+        this.productId = productId;
+        this.brand = brand;
+        this.model = model;
+    }
+
+    public Product(int productId, String brand, String model, String specifications, String price, Color[] colors) {
         this.productId = productId;
         this.brand = brand;
         this.model = model;
