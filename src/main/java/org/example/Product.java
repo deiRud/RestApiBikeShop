@@ -1,22 +1,25 @@
 package org.example;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.UUID;
 
 public class Product {
-    private int productId;
+    private UUID productId;
     private String brand;
     private String model;
     private String specifications;
-    private String price;
+    private double price;
     private Color[] colors;
 
-    public Product(int productId,String brand, String model) {
+    public Product() {
+    }
+
+    public Product(UUID productId,String brand, String model) {
         this.productId = productId;
         this.brand = brand;
         this.model = model;
     }
 
-    public Product(int productId, String brand, String model, String specifications, String price, Color[] colors) {
+    public Product(UUID productId, String brand, String model, String specifications, double price, Color[] colors) {
         this.productId = productId;
         this.brand = brand;
         this.model = model;
@@ -25,11 +28,11 @@ public class Product {
         this.colors = colors;
     }
 
-    public int getProductId() {
+    public UUID getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(UUID productId) {
         this.productId = productId;
     }
 
@@ -57,11 +60,11 @@ public class Product {
         this.specifications = specifications;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

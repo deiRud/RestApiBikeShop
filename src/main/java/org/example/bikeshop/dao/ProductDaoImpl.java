@@ -9,11 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ProductDaoImpl implements ProductDao{
     private final DataSource dataSource;
 
-    private static final String PRODUCT_ID = "product_id";
+    private static final String P_UUID = "p_uuid";
     private static final String BRAND = "brand";
     private static final String MODEL = "model";
     private static final String SPECIFICATIONS = "specifications";
@@ -46,11 +47,11 @@ public class ProductDaoImpl implements ProductDao{
 
     private Product createProduct(ResultSet rs) throws SQLException {
         return new Product(
-                rs.getInt(PRODUCT_ID),
+                UUID.fromString(rs.getString(P_UUID)),
                 rs.getString(BRAND),
                 rs.getString(MODEL),
                 rs.getString(SPECIFICATIONS),
-                rs.getString(PRICE),
+                rs.getDouble(PRICE),
                 new Color[]{
                         new Color(rs.getString(COLOR), rs.getString(IMAGE_URL))
                 }
