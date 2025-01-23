@@ -11,6 +11,7 @@ import java.util.Properties;
 public class DatabaseConnection {
     private static HikariDataSource dataSource;
 
+
     static {
         Properties properties = new Properties();
         try (InputStream input = DatabaseConnection.class.getClassLoader().getResourceAsStream("database.properties")) {
