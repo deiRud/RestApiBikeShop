@@ -11,12 +11,11 @@ public class Product {
     private Color[] colors;
 
     public Product() {
+      this.productId = UUID.randomUUID();
     }
 
-    public Product(UUID productId,String brand, String model) {
+    public Product(UUID productId) {
         this.productId = productId;
-        this.brand = brand;
-        this.model = model;
     }
 
     public Product(UUID productId, String brand, String model, String specifications, double price, Color[] colors) {

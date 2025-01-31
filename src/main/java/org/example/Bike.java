@@ -10,6 +10,14 @@ public class Bike  extends Product{
         this.weight = weight;
     }
 
+    public Bike(){
+
+    }
+
+    public Bike(UUID productId){
+        super(productId);
+    }
+
     public double getWeight() {
         return weight;
     }

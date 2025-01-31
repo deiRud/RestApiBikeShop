@@ -11,9 +11,18 @@ import static spark.Spark.*;
 
 
 public class BikeShop {
-    public static void main(String[] args) {
-        port(8002);
+    private static final int PORT = 8002;
 
+    public static void main(String[] args) {
+        configureServer();
+        DataSource dataSource = DatabaseConnection.getDataSource();
+        ProductDao productDao = new ProductDaoImpl(dataSource);
+        configureRoutes(productDao);
+        testDatabaseConnection(dataSource);
+    }
+
+    private static void configureServer() {
+        port(PORT);
         staticFileLocation("/public");
 
         before((request, response) -> {
@@ -21,10 +30,9 @@ public class BikeShop {
             response.header("Access-Control-Allow-Methods", "GET");
             response.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
         });
+    }
 
-        DataSource dataSource = DatabaseConnection.getDataSource();
-        ProductDao productDao = new ProductDaoImpl(dataSource);
-
+    private static void configureRoutes(ProductDao productDao) {
         get("products/:category", (req, res) -> {
             String category = req.params(":category");
             res.type("application/json");
@@ -32,7 +40,9 @@ public class BikeShop {
             List<Product> products = productDao.getByCategory(category);
             return gson.toJson(products);
         });
+    }
 
+    private static void testDatabaseConnection(DataSource dataSource) {
         try (Connection connection = dataSource.getConnection()) {
             if (connection != null) {
                 System.out.println("Connected to the database!");
