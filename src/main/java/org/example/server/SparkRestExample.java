@@ -1,5 +1,9 @@
-package org.example;
+package org.example.server;
 import com.google.gson.Gson;
+import org.example.Bike;
+import org.example.BikeService;
+import org.example.BikeServiceImpl;
+
 import static spark.Spark.*;
 
 public class SparkRestExample {

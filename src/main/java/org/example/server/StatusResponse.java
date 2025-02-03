@@ -1,4 +1,4 @@
-package org.example;
+package org.example.server;
 
 public enum StatusResponse {
     SUCCESS("Success"),

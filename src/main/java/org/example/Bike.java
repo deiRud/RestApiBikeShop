@@ -1,58 +1,28 @@
 package org.example;
 
-public class Bike {
-    private int bikeId;
-    private String nameModel;
-    private String company;
-    private double price;
-    private String description;
+import java.util.UUID;
 
-    public Bike(int bikeId, String nameModel, String company, double price, String description) {
-        this.bikeId = bikeId;
-        this.nameModel = nameModel;
-        this.company = company;
-        this.price = price;
-        this.description = description;
+public class Bike  extends Product{
+    private double weight;
+
+    public Bike(UUID productId, String brand, String model, String specifications, double price, Color[] colors, double weight) {
+        super(productId, brand, model, specifications, price, colors);
+        this.weight = weight;
     }
 
-    public void setBikeId(int bikeId) {
-        this.bikeId = bikeId;
+    public Bike(){
+
     }
 
-    public String getNameModel() {
-        return nameModel;
+    public Bike(UUID productId){
+        super(productId);
     }
 
-    public void setNameModel(String nameModel) {
-        this.nameModel = nameModel;
+    public double getWeight() {
+        return weight;
     }
 
-    public String getCompany() {
-        return company;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getBikeId(){
-        return "";
-    }
-
 }
